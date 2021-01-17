@@ -1,10 +1,10 @@
-package com.spadial.inkay;
+package com.spadial.inkai;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class InkayApplicationTests {
+class InkaiApplicationTests {
 
 	@Test
 	void contextLoads() {

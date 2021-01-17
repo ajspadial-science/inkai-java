@@ -1,4 +1,4 @@
-package com.spadial.inkay;
+package com.spadial.inkai;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +10,7 @@ public class RootController {
 
 	@GetMapping("/")
 	public String index(Model model) {
-		model.addAttribute("foo", "Hello, Inkay!");
+		model.addAttribute("foo", "Hello, Inkai!");
 		return "index";
 	}
 

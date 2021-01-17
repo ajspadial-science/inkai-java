@@ -1,4 +1,4 @@
-package com.spadial.inkay;
+package com.spadial.inkai;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;

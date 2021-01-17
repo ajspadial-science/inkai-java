@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.spadial</groupId>
-	<artifactId>inkay</artifactId>
+	<artifactId>inkai</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>inkay</name>
-	<description>Inkay </description>
+	<name>inkai</name>
+	<description>Inkai </description>
 
 	<properties>
 		<java.version>1.8</java.version>
