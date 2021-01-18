@@ -8,12 +8,12 @@ import java.nio.file.Files;
 import java.io.File;
 import java.io.IOException;
 
-public class Template {
+public class Crosswalk {
     ArrayList<Field> fields;
 
     public static final int MAX_ROWS = 2000;
 
-    Template() {
+    Crosswalk() {
         fields = new ArrayList<>();
 
         fields.add(new Field("icts"));

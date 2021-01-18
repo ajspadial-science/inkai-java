@@ -68,7 +68,7 @@ public class TablesController {
 	public ResponseEntity<Object> downloadFile() throws IOException {
 		// String filename = "/var/tmp/mysql.png";
 		// File file = new File(filename);
-		Template t = new Template();
+		Crosswalk t = new Crosswalk();
 		File file = t.exportTemplate();
 		InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 		HttpHeaders headers = new HttpHeaders();
