@@ -6,8 +6,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -64,10 +62,8 @@ public class TablesController {
 		return s.toString();
 	}
 
-	@RequestMapping(value = "/download", method = RequestMethod.GET)
+	@GetMapping(value = "/download")
 	public ResponseEntity<Object> downloadFile() throws IOException {
-		// String filename = "/var/tmp/mysql.png";
-		// File file = new File(filename);
 		Crosswalk t = new Crosswalk();
 		File file = t.exportTemplate();
 		InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
@@ -78,11 +74,8 @@ public class TablesController {
 		headers.add("Pragma", "no-cache");
 		headers.add("Expires", "0");
 			
-		ResponseEntity<Object> 
-		responseEntity = ResponseEntity.ok().headers(headers).contentLength(file.length()).contentType(
+		return ResponseEntity.ok().headers(headers).contentLength(file.length()).contentType(
 			MediaType.parseMediaType("application/octet-stream")).body(resource);
-			
-		return responseEntity;
 		}
 			
     }
