@@ -1,11 +1,18 @@
 <html>
     <head>
         <title>INKAI 4º|< </title>
-        
+
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/skeleton.css">
     </head>
     <body>
         <h1>{{foo}}</h1>
+
+        <h2>Tables</h2>
+        <ul>
+            {{#each tablas}}
+                <li>{{this}}</li>
+            {{/each}}
+        </ul>
     </body>
 </html>

@@ -1,10 +1,11 @@
 package com.spadial.inkai;
 
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.sql.Connection;
@@ -12,6 +13,8 @@ import java.sql.DriverManager;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.commons.configuration2.Configuration;
@@ -21,7 +24,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-@RestController
+@Controller
 public class TablesController {
 
 	private String dbHost;
@@ -30,7 +33,7 @@ public class TablesController {
 	private String dbPassword;
 
 	@GetMapping("/tables")
-	public String tables() throws SQLException {
+	public String tables(Model m) throws SQLException {
 		Configurations configs = new Configurations();
 		try {
 			Configuration config = configs.properties(new File("config.properties"));
@@ -44,14 +47,17 @@ public class TablesController {
 			// Something went wrong
 		}
 		StringBuilder s = new StringBuilder();
-		Connection conn = null;
+		Connection conn = null;	
+		List<String> r = new ArrayList<String>();
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://" + dbHost + "/" + dbDatabase, dbUser, dbPassword);
 
 			DatabaseMetaData md = conn.getMetaData();
 			ResultSet rs = md.getTables("ictsdata", null, "%", null);
+		
 			while (rs.next()) {
-				s.append(rs.getString(3) + "<br/>");
+				//s.append(rs.getString(3) + "<br/>");
+				r.add(rs.getString(3));
 			}
 		} catch (SQLException ex) {
 			return "Error accessing database: " + ex.getMessage();
@@ -59,7 +65,9 @@ public class TablesController {
 			if (conn != null)
 				conn.close();
 		}
-		return s.toString();
+
+		m.addAttribute("tablas", r);
+		return "index";
 	}
 
 	@GetMapping(value = "/download")
