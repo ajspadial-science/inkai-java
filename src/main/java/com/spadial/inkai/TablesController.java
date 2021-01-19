@@ -46,9 +46,8 @@ public class TablesController {
 		} catch (ConfigurationException cex) {
 			// Something went wrong
 		}
-		StringBuilder s = new StringBuilder();
 		Connection conn = null;	
-		List<String> r = new ArrayList<String>();
+		List<String> r = new ArrayList<>();
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://" + dbHost + "/" + dbDatabase, dbUser, dbPassword);
 
@@ -56,7 +55,6 @@ public class TablesController {
 			ResultSet rs = md.getTables("ictsdata", null, "%", null);
 		
 			while (rs.next()) {
-				//s.append(rs.getString(3) + "<br/>");
 				r.add(rs.getString(3));
 			}
 		} catch (SQLException ex) {
