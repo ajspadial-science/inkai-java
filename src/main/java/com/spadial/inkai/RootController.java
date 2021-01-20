@@ -10,7 +10,7 @@ public class RootController {
 
 	@GetMapping("/")
 	public String index(Model model) {
-		model.addAttribute("foo", "Hello, Inkai!");
+		model.addAttribute("foo", "Ave, Inkai!");
 		return "index";
 	}
 
