@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -32,8 +33,10 @@ public class TablesController {
 	private String dbUser;
 	private String dbPassword;
 
-	@GetMapping("/tables")
-	public String tables(Model m) throws SQLException {
+	private Connection conn;
+
+	TablesController () {
+		super();
 		Configurations configs = new Configurations();
 		try {
 			Configuration config = configs.properties(new File("config.properties"));
@@ -46,26 +49,64 @@ public class TablesController {
 		} catch (ConfigurationException cex) {
 			// Something went wrong
 		}
-		Connection conn = null;	
+	}
+
+	private DatabaseMetaData getMetadata() throws SQLException{
+		DatabaseMetaData md = null;
+		conn = DriverManager.getConnection("jdbc:mysql://" + dbHost + "/" + dbDatabase, dbUser, dbPassword);
+
+		md = conn.getMetaData();
+			
+		return md;
+	}
+
+
+	@GetMapping("/tables")
+	public String tables(Model m) throws SQLException {
 		List<String> r = new ArrayList<>();
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://" + dbHost + "/" + dbDatabase, dbUser, dbPassword);
-
-			DatabaseMetaData md = conn.getMetaData();
+			DatabaseMetaData md = getMetadata();
 			ResultSet rs = md.getTables("ictsdata", null, "%", null);
-		
+			
 			while (rs.next()) {
 				r.add(rs.getString(3));
 			}
-		} catch (SQLException ex) {
-			return "Error accessing database: " + ex.getMessage();
-		} finally {
+		}
+		catch (SQLException ex) {
+			m.addAttribute("ex", ex.getMessage());
+			return "database-error";
+		}
+		finally {
 			if (conn != null)
 				conn.close();
 		}
 
 		m.addAttribute("tablas", r);
 		return "index";
+	}
+
+	@GetMapping("/table/{t}")
+	public String table(@PathVariable("t") String t, Model m) throws SQLException {
+		List<String> r = new ArrayList<>();
+		try {
+		DatabaseMetaData md = getMetadata();
+		ResultSet rs = md.getColumns("ictsdata", null, t, "%");
+		
+			while (rs.next()) {
+				r.add(rs.getString(4));
+			}
+		}
+		catch (SQLException ex) {
+			m.addAttribute("ex", ex.getMessage());
+			return "database-error";
+		}
+		finally {
+			if (conn != null)
+				conn.close();
+		}
+		m.addAttribute("table", t);
+		m.addAttribute("fields", r);
+		return "table";
 	}
 
 	@GetMapping(value = "/download")

@@ -1,17 +1,17 @@
 <html>
     <head>
-        <title>INKAI 4º|< </title>
+        <title>Table Crosswalk||| {{table}} </title>
 
         <link rel="stylesheet" href="/css/normalize.css">
         <link rel="stylesheet" href="/css/skeleton.css">
     </head>
     <body>
-        <h1>{{foo}}</h1>
+        <h1>Crosswalk: {{table}}</h1>
 
-        <h2>Tables</h2>
+        <h2>Fields</h2>
         <ul>
-            {{#each tablas}}
-                <li><a href="table/{{this}}">{{this}}</a></li>
+            {{#each fields}}
+                <li>{{this}}
             {{/each}}
         </ul>
     </body>
