@@ -10,11 +10,39 @@
             <h1>Crosswalk: {{table}}</h1>
 
             <h2>Fields</h2>
-            <ul>
-                {{#each fields}}
-                    <li>{{this}}
-                {{/each}}
-            </ul>
+            <form>
+            {{#each fields}}
+            <div class="row">
+                <div class="three columns">
+                    <label>{{this}}</label>
+                </div>
+                <div class="four columns">
+                    <input class="u-full-width" placeholder="Name in the uploading template" id="{{this}}-newname">
+                </div>
+                <div class="three columns">
+                    <select class="u-full-width" id="{{this}}-type">
+                        <option value="ignore">Ignorar</option>
+                        <option value="number">Número</option>
+                        <option value="date">Fecha</option>
+                        <option value="maxchar">Texto de longitud máxima</option>
+                        <option value="range">Selección de valores</option>
+                    </select>
+                </div>  
+                <div class="two columns">
+                    <input class="u-full-width" placeholder="Details" id="{{this}}-details">
+                </div>
+            </div>
+            {{/each}}
+            <div class="row">
+                <div class="two columns">
+                    <a class="button" href="/tables">Cancel</a>
+                </div>
+                <div class="two columns">
+                    <input class="button-primary" type="submit" value="Submit"> 
+                </div>
+            </div>
+              
+            </form>
         </div>
     </body>
 </html>
