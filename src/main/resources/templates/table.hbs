@@ -6,13 +6,15 @@
         <link rel="stylesheet" href="/css/skeleton.css">
     </head>
     <body>
-        <h1>Crosswalk: {{table}}</h1>
+        <div class="container">
+            <h1>Crosswalk: {{table}}</h1>
 
-        <h2>Fields</h2>
-        <ul>
-            {{#each fields}}
-                <li>{{this}}
-            {{/each}}
-        </ul>
+            <h2>Fields</h2>
+            <ul>
+                {{#each fields}}
+                    <li>{{this}}
+                {{/each}}
+            </ul>
+        </div>
     </body>
 </html>
