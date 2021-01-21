@@ -5,17 +5,26 @@
         <link rel="stylesheet" href="/css/normalize.css">
         <link rel="stylesheet" href="/css/skeleton.css">
     </head>
-    <body>
-        <div class="container">
-            <h1>{{foo}}</h1>
+    <body style="height=100%;">
+        <div class="container" style="padding-top: 8em;">
 
-            <h2><a href="/tables">Tables</a></h2>
-            <ul>
-                {{#each tablas}}
-                    <li><a href="table/{{this}}">{{this}}</a></li>
-                {{/each}}
-            </ul>
-            <p><a href="/tables">Back to tables</a></p>
+            <div class = "row">
+                <div class = "one-half column">
+                    <h1>{{foo}}</h1>
+                    <p style="font-size: 2.7rem;">Design and run Crosswalks for your DBs with the Inkai ETL Tool</p>
+                    <a class="button button-primary" href="/tables">Start!</a>
+                </div>
+                <div class = "one-half column">
+                    <img class="u-max-full-width" src="/images/inkai_logo.jpg">
+                </div>
+            </div>   
+        </div>
+
+        <div class="container" style="position:fixed; bottom:0px">
+            <footer style="background-color:aliceblue;">
+                <h5>What's a Crosswalk?</h5>
+                <p>Check <a href="https://en.wikipedia.org/wiki/Schema_crosswalk" target="_blank">the Schema Crosswalk article</a> at Wikipedia to know more</p>                
+            </footer>
         </div>
     </body>
 </html>

@@ -80,9 +80,9 @@ public class TablesController {
 			if (conn != null)
 				conn.close();
 		}
-
+		m.addAttribute("db", "miDB");
 		m.addAttribute("tablas", r);
-		return "index";
+		return "tables";
 	}
 
 	@GetMapping("/table/{t}")
